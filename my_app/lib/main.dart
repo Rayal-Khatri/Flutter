@@ -11,10 +11,27 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int passengerCount = 0; // Variable to store the counter value
+  int savedPassengerCount = 0;
+  String BusCount = "The number of passengers are: ";
 
   void incPassenger() {
     setState(() {
       passengerCount++; // Increment passengerCount by one
+    });
+  }
+
+  void _changeBus() {
+    setState(() {
+      savedPassengerCount = passengerCount;
+      BusCount = BusCount + passengerCount.toString() + " ";
+      passengerCount = 0;
+    });
+  }
+
+  void _Reset() {
+    setState(() {
+      BusCount = "The Number of passengers are: ";
+      passengerCount = 0;
     });
   }
 
@@ -29,6 +46,7 @@ class _MyAppState extends State<MyApp> {
           title: Text('Passenger Counting Apps'),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Text(
@@ -37,9 +55,34 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             SizedBox(height: 16),
-            ElevatedButton(onPressed: incPassenger, child: Text('Pasenger On')),
-            ElevatedButton(onPressed: () {}, child: Text('Change Bus')),
-            ElevatedButton(onPressed: () {}, child: Text('Reset App')),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              ElevatedButton(
+                onPressed: incPassenger,
+                child: Text('Pasenger On'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: _changeBus,
+                child: Text('Change Bus'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.grey),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: _Reset,
+                child: Text('Reset App'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+              ),
+            ]),
+            Center(
+              child: Text('$BusCount'),
+            )
           ],
         ),
       ),
