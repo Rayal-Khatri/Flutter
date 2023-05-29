@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Home/Pets_to_adopt.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
@@ -18,7 +19,7 @@ class _MainPetPageState extends State<MainPetPage> {
         children: [
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: 35, bottom: 15),
+              margin: EdgeInsets.only(top: 25, bottom: 15),
               padding: EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
                   color: AppColors.smokeColor,
@@ -69,6 +70,7 @@ class _MainPetPageState extends State<MainPetPage> {
               ),
             ),
           ),
+          PetAdoptChoices(),
         ],
       ),
     );
