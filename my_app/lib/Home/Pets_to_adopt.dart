@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
+import 'package:my_app/Widgets/Icon_Text.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
 
 class PetAdoptChoices extends StatefulWidget {
@@ -15,8 +16,8 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
-      height: 320,
+      // color: Colors.red,
+      height: 280,
       child: PageView.builder(
           controller: pageController,
           itemCount: 5,
@@ -29,8 +30,8 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
   Widget _buildPageItem(int index) {
     return Stack(children: [
       Container(
-        height: 220,
-        margin: EdgeInsets.only(left: 5, right: 5),
+        height: 230,
+        margin: EdgeInsets.only(left: 10, right: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
@@ -42,17 +43,24 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
       Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: 130,
-          margin: EdgeInsets.only(left: 25, right: 25, bottom: 15),
+          height: 110,
+          margin: EdgeInsets.only(left: 17, right: 17, bottom: 7),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.white,
-          ),
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 1),
+                  blurRadius: 2,
+                  spreadRadius: 1,
+                ),
+              ]),
           child: Container(
-            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            padding: EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Column(children: [
               BigText(text: "Shena's Care"),
-              SizedBox(height: 30),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -69,39 +77,22 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                   SmallText(text: "123 Reviews"),
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        color: Colors.yellow,
-                        size: 10,
-                      ),
-                      SmallText(text: "Normal")
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_city,
-                        size: 10,
-                      ),
-                      SmallText(text: "2.1Km")
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.lock_clock,
-                        color: AppColors.mainColor,
-                        size: 10,
-                      ),
-                      SmallText(text: "32mins")
-                    ],
-                  ),
+                  IconAndText(
+                      icon: Icons.circle_sharp,
+                      text: " Normal",
+                      iconColor: AppColors.iconColor1),
+                  IconAndText(
+                      icon: Icons.gps_fixed_sharp,
+                      text: " 2.1Km",
+                      iconColor: AppColors.mainColor),
+                  IconAndText(
+                      icon: Icons.access_alarm_rounded,
+                      text: " 3.2 mins",
+                      iconColor: AppColors.iconColor2),
                 ],
               )
             ]),

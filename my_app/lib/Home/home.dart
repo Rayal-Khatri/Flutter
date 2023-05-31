@@ -22,16 +22,7 @@ class _MainPetPageState extends State<MainPetPage> {
               margin: EdgeInsets.only(top: 25, bottom: 15),
               padding: EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
-                  color: AppColors.smokeColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1),
-                      blurRadius: 2,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(15)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
