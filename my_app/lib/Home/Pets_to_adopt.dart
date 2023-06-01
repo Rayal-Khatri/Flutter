@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Utils/Colors.dart';
+import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
@@ -16,7 +17,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 230;
+  double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
       children: [
         Container(
           // color: Colors.red,
-          height: 280,
+          height: Dimensions.pageView,
           child: PageView.builder(
               controller: pageController,
               itemCount: 5,
@@ -52,6 +53,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
           position: _currPageValue,
           decorator: DotsDecorator(
             size: const Size.square(9.0),
+            activeColor: AppColors.mainColor,
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
@@ -89,10 +91,10 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
         transform: matrix,
         child: Stack(children: [
           Container(
-            height: 230,
+            height: Dimensions.pageViewContainer,
             margin: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(Dimensions.height30),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                   fit: BoxFit.cover,
@@ -102,10 +104,10 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 110,
+              height: Dimensions.pageViewTextContainer,
               margin: EdgeInsets.only(left: 17, right: 17, bottom: 7),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(Dimensions.height20),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -115,10 +117,11 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                     ),
                   ]),
               child: Container(
-                padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                padding: EdgeInsets.only(
+                    top: Dimensions.height15, left: 10, right: 10),
                 child: Column(children: [
                   BigText(text: "Shena's Care"),
-                  SizedBox(height: 10),
+                  SizedBox(height: Dimensions.height10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -135,7 +138,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                       SmallText(text: "123 Reviews"),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: Dimensions.height20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

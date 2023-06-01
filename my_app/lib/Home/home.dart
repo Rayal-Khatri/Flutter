@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Home/Pets_to_adopt.dart';
 import 'package:my_app/Utils/Colors.dart';
+import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
 
@@ -22,7 +23,8 @@ class _MainPetPageState extends State<MainPetPage> {
               margin: EdgeInsets.only(top: 25, bottom: 15),
               padding: EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(Dimensions.height15)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -37,9 +39,12 @@ class _MainPetPageState extends State<MainPetPage> {
                           SmallText(
                             text: "Lalitpur",
                             color: Colors.black54,
-                            size: 12,
+                            size: 8,
                           ),
-                          Icon(Icons.arrow_drop_down_rounded)
+                          Icon(
+                            Icons.arrow_drop_down_rounded,
+                            size: 10,
+                          )
                         ],
                       ),
                     ],
@@ -53,7 +58,7 @@ class _MainPetPageState extends State<MainPetPage> {
                       color: Colors.white,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(Dimensions.height15),
                       color: AppColors.mainColor,
                     ),
                   ))
