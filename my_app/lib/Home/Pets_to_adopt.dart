@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
 
@@ -34,15 +35,29 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.red,
-      height: 280,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context, position) {
-            return _buildPageItem(position);
-          }),
+    return Column(
+      children: [
+        Container(
+          // color: Colors.red,
+          height: 280,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: 5,
+              itemBuilder: (context, position) {
+                return _buildPageItem(position);
+              }),
+        ),
+        new DotsIndicator(
+          dotsCount: 5,
+          position: _currPageValue,
+          decorator: DotsDecorator(
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 
@@ -90,14 +105,13 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               height: 110,
               margin: EdgeInsets.only(left: 17, right: 17, bottom: 7),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1),
-                      blurRadius: 2,
-                      spreadRadius: 1,
+                      color: Color(0xFFe8e8e8),
+                      blurRadius: 5.0,
+                      offset: Offset(0, 5),
                     ),
                   ]),
               child: Container(
