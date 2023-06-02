@@ -18,10 +18,13 @@ class _MainPetPageState extends State<MainPetPage> {
     return Scaffold(
       body: Column(
         children: [
+          //Location
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: 25, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(
+                  top: Dimensions.height45, bottom: Dimensions.height15),
+              padding: EdgeInsets.only(
+                  left: Dimensions.height20, right: Dimensions.height20),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(Dimensions.height15)),
@@ -51,11 +54,12 @@ class _MainPetPageState extends State<MainPetPage> {
                   ),
                   Center(
                       child: Container(
-                    width: 45,
-                    height: 45,
+                    width: Dimensions.height45,
+                    height: Dimensions.height45,
                     child: Icon(
                       Icons.search,
                       color: Colors.white,
+                      size: Dimensions.height24,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.height15),
@@ -66,7 +70,35 @@ class _MainPetPageState extends State<MainPetPage> {
               ),
             ),
           ),
+          //Sliders
           PetAdoptChoices(),
+          //Gap
+          SizedBox(height: Dimensions.height30),
+          //Text
+          Container(
+            margin: EdgeInsets.only(left: Dimensions.height30),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  BigText(text: "Popular"),
+                  SizedBox(
+                    width: Dimensions.height10,
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(bottom: 3),
+                      child: SmallText(text: "Recommended For You"))
+                ]),
+          ),
+          //List of pets avaliable
+          ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.height20, right: Dimensions.height20),
+                );
+              }),
         ],
       ),
     );

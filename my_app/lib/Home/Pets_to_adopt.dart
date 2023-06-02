@@ -92,7 +92,8 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: 10, right: 10),
+            margin: EdgeInsets.only(
+                left: Dimensions.height10, right: Dimensions.height10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.height30),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
@@ -105,7 +106,10 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(left: 17, right: 17, bottom: 7),
+              margin: EdgeInsets.only(
+                  left: Dimensions.height30,
+                  right: Dimensions.height30,
+                  bottom: Dimensions.height30),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.height20),
                   color: Colors.white,
@@ -118,7 +122,9 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                   ]),
               child: Container(
                 padding: EdgeInsets.only(
-                    top: Dimensions.height15, left: 10, right: 10),
+                    top: Dimensions.height15,
+                    left: Dimensions.height10,
+                    right: Dimensions.height10),
                 child: Column(children: [
                   BigText(text: "Shena's Care"),
                   SizedBox(height: Dimensions.height10),
@@ -131,7 +137,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                             (index) => Icon(
                                   Icons.stars,
                                   color: AppColors.mainColor,
-                                  size: 15,
+                                  size: Dimensions.height15,
                                 )),
                       ),
                       SmallText(text: "4.5"),
