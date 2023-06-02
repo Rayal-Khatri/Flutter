@@ -96,7 +96,17 @@ class _MainPetPageState extends State<MainPetPage> {
               itemBuilder: (context, index) {
                 return Container(
                   margin: EdgeInsets.only(
-                      left: Dimensions.height20, right: Dimensions.height20),
+                      left: Dimensions.height20, right: Dimensions.height20 ),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Dimensions.height20),
+                          image: DecorationImage(image: AssetImage("assets/Images/cat1.jpg"))
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }),
         ],
