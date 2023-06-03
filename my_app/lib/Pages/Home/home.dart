@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Home/Pets_to_adopt.dart';
+import 'package:my_app/Pages/Home/Pets_to_adopt.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/Big_texts.dart';

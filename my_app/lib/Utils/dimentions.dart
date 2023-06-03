@@ -19,4 +19,7 @@ class Dimensions {
   static double width15 = screenHeight / 56.27;
   static double width20 = screenHeight / 42.2;
   static double width30 = screenHeight / 28.13;
+
+  static double ListViewImgSize = screenWidth / 7.7;
+  static double ListViewTextContSize = screenWidth / 9.4;
 }
