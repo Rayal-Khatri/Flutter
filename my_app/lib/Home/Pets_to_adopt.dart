@@ -58,6 +58,107 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
           ),
+        ),
+        //Gap
+        SizedBox(height: Dimensions.height30),
+        //Text
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.height30),
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                BigText(text: "Popular"),
+                SizedBox(
+                  width: Dimensions.height10,
+                ),
+                Container(
+                    margin: EdgeInsets.only(bottom: 3),
+                    child: SmallText(text: "Recommended For You"))
+              ]),
+        ),
+        //List of pets avaliable
+        Container(
+          height: 900,
+          child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.height20,
+                      right: Dimensions.height20,
+                      bottom: Dimensions.height10),
+                  child: Row(
+                    children: [
+                      //Image Section
+                      Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.height20),
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/Images/cat1.jpg"))),
+                      ),
+                      //Text Container
+                      Expanded(
+                        child: Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.height20),
+                                bottomRight:
+                                    Radius.circular(Dimensions.height20)),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: Dimensions.height10,
+                                right: Dimensions.height5),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  //Text Title for Pet Name
+                                  BigText(text: "New Kittens Avaliable"),
+                                  SizedBox(
+                                    height: Dimensions.height10,
+                                  ),
+                                  //Shelther name
+                                  SmallText(text: "Shena's Care"),
+                                  SizedBox(
+                                    height: Dimensions.height10,
+                                  ),
+                                  //Icons And Locations
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      IconAndText(
+                                          icon: Icons.circle_sharp,
+                                          text: " Normal",
+                                          iconColor: AppColors.iconColor1),
+                                      IconAndText(
+                                          icon: Icons.gps_fixed_sharp,
+                                          text: " 2.1Km",
+                                          iconColor: AppColors.mainColor),
+                                      IconAndText(
+                                          icon: Icons.access_alarm_rounded,
+                                          text: " 3.2 mins",
+                                          iconColor: AppColors.iconColor2),
+                                    ],
+                                  )
+                                ]),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
         )
       ],
     );

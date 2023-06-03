@@ -20,6 +20,7 @@ class BigText extends StatelessWidget {
       text,
       maxLines: 1,
       overflow: overFlow,
+      textAlign: TextAlign.left,
       style: TextStyle(
         color: color,
         fontSize: size == 0 ? Dimensions.height20 : size,

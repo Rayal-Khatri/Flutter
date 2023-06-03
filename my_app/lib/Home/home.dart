@@ -71,44 +71,10 @@ class _MainPetPageState extends State<MainPetPage> {
             ),
           ),
           //Sliders
-          PetAdoptChoices(),
-          //Gap
-          SizedBox(height: Dimensions.height30),
-          //Text
-          Container(
-            margin: EdgeInsets.only(left: Dimensions.height30),
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  BigText(text: "Popular"),
-                  SizedBox(
-                    width: Dimensions.height10,
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(bottom: 3),
-                      child: SmallText(text: "Recommended For You"))
-                ]),
-          ),
-          //List of pets avaliable
-          ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.height20, right: Dimensions.height20 ),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Dimensions.height20),
-                          image: DecorationImage(image: AssetImage("assets/Images/cat1.jpg"))
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }),
+          Expanded(
+              child: SingleChildScrollView(
+            child: PetAdoptChoices(),
+          )),
         ],
       ),
     );
