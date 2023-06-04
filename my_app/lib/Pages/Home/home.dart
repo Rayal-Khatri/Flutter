@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Pages/Home/Pets_to_adopt.dart';
-import 'package:my_app/Pages/Shelthers/Popular_Shelthers_page.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
@@ -74,7 +73,7 @@ class _MainPetPageState extends State<MainPetPage> {
           //Sliders
           Expanded(
               child: SingleChildScrollView(
-            child: PopularShelther(),
+            child: PetAdoptChoices(),
           )),
         ],
       ),

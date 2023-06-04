@@ -22,4 +22,6 @@ class Dimensions {
 
   static double ListViewImgSize = screenWidth / 7.7;
   static double ListViewTextContSize = screenWidth / 9.4;
+
+  static double ImgHeightStatic = screenHeight / 2.41;
 }

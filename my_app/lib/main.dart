@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Home/home.dart';
 import 'package:get/get.dart';
- 
+import 'package:my_app/Pages/Shelthers/Popular_Shelthers_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,13 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Passenger Counter',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: MainPetPage(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Passenger Counter',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: PopularShelther());
   }
 }
