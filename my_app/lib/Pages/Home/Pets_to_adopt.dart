@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/dimentions.dart';
+import 'package:my_app/Widgets/App_column.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
@@ -223,44 +224,9 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                     top: Dimensions.height15,
                     left: Dimensions.height10,
                     right: Dimensions.height10),
-                child: Column(children: [
-                  BigText(text: "Shena's Care"),
-                  SizedBox(height: Dimensions.height10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                            5,
-                            (index) => Icon(
-                                  Icons.stars,
-                                  color: AppColors.mainColor,
-                                  size: Dimensions.height15,
-                                )),
-                      ),
-                      SmallText(text: "4.5"),
-                      SmallText(text: "123 Reviews"),
-                    ],
-                  ),
-                  SizedBox(height: Dimensions.height20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconAndText(
-                          icon: Icons.circle_sharp,
-                          text: " Normal",
-                          iconColor: AppColors.iconColor1),
-                      IconAndText(
-                          icon: Icons.gps_fixed_sharp,
-                          text: " 2.1Km",
-                          iconColor: AppColors.mainColor),
-                      IconAndText(
-                          icon: Icons.access_alarm_rounded,
-                          text: " 3.2 mins",
-                          iconColor: AppColors.iconColor2),
-                    ],
-                  )
-                ]),
+                child: AppColumn(
+                  text: "Shena's Care",
+                ),
               ),
             ),
           )
