@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Pages/Shelthers/Adoption_Pet_Details.dart';
 import 'package:my_app/Pages/Shelthers/Popular_Shelthers_page.dart';
 
 void main() {
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: PopularShelther());
+        home: AdoptionPetDetails());
   }
 }
