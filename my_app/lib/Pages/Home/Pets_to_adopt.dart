@@ -32,6 +32,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
 
   @override
   void dispose() {
+    super.dispose();
     pageController.dispose();
   }
 

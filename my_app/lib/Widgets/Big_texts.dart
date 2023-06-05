@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Utils/dimentions.dart';
 
+// ignore: must_be_immutable
 class BigText extends StatelessWidget {
   Color? color;
   final String text;
