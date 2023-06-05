@@ -22,4 +22,6 @@ class Dimensions {
   static double TextSize26 = screenHeight / 32.46;
 
   static double ImgHeightStatic = screenHeight / 2.41;
+
+  static double BottomHeightBar = screenHeight / 7.03;
 }
