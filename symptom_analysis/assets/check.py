@@ -1,14 +1,18 @@
-import csv
-def convert_dataset_encoding(dataset_path, output_path):
-    with open(dataset_path, 'r', encoding='latin-1') as input_file:
-        data = input_file.read()
-    
-    with open(output_path, 'w', encoding='utf-8') as output_file:
-        output_file.write(data)
+#with open('D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.csv', 'r', encoding='utf-8') as file:
+input_file = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.csv'
+output_file = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data2.csv'
 
-# Example usage
-dataset_path = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.csv'
-output_path = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.1csv'
-convert_dataset_encoding(dataset_path, output_path)
-print("Dataset converted successfully!")
+with open(input_file, 'r', encoding='utf-8') as file:
+    lines = file.readlines()
+
+# Remove inconsistent quotation marks and strip whitespace
+updated_lines = [line.replace('"', '').strip() for line in lines]
+
+# Write the updated dataset to a new file
+with open(output_file, 'w', encoding='utf-8') as file:
+    file.write('\n'.join(updated_lines))
+
+print("Dataset formatting updated successfully.")
+
+
 
