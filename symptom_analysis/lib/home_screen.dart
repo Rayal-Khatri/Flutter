@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:csv/csv.dart';
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:csv/csv.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,19 +9,38 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<List<dynamic>> data = [];
+  List<String> symptoms = [];
+  List<String> selectedSymptoms = [];
 
-  Future<void> loadAsset() async {
-    final csvData = await rootBundle.loadString('assets/disease_data.csv');
-    List<List<dynamic>> csvTable = CsvToListConverter().convert(csvData);
+  Future<void> loadDataset() async {
+    // Load dataset from CSV file
+    String datasetPath = 'assets/disease_data.csv';
+    String datasetContent = await rootBundle.loadString(datasetPath);
+    List<List<dynamic>> csvTable = CsvToListConverter().convert(datasetContent);
+
+    // Extract symptoms from the dataset
+    List<String?> allSymptoms = [];
+    for (var disease in csvTable) {
+      String symptomString = disease[1].toString();
+      RegExp regExp = RegExp(r"'(.*?)'");
+      Iterable<Match> matches = regExp.allMatches(symptomString);
+      List<String?> extractedSymptoms =
+          matches.map((match) => match.group(1)).toList();
+      allSymptoms.addAll(extractedSymptoms);
+    }
+    allSymptoms = allSymptoms.where((symptom) => symptom != null).toList();
+    allSymptoms.sort();
+
     setState(() {
       data = csvTable;
+      symptoms = allSymptoms.cast<String>();
     });
   }
 
   @override
   void initState() {
     super.initState();
-    loadAsset();
+    loadDataset();
   }
 
   @override
@@ -31,31 +49,69 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Symptom Analysis'),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: data.isNotEmpty
-            ? DataTable(
-                columns: List<DataColumn>.generate(
-                  data[0].length,
-                  (index) => DataColumn(
-                    label: Text(data[0][index].toString()),
-                  ),
-                ),
-                rows: List<DataRow>.generate(
-                  data.length > 1 ? data.length - 1 : 0,
-                  (index) => DataRow(
-                    cells: List<DataCell>.generate(
-                      data[index + 1].length,
-                      (cellIndex) => DataCell(
-                        Text(data[index + 1][cellIndex].toString()),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            : Center(
-                child: Text('No data available'),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'List of Symptoms:',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+            SizedBox(height: 8.0),
+            DropdownButton<String>(
+              hint: Text('Select Symptoms'),
+              value: null,
+              onChanged: (String? selectedSymptom) {
+                setState(() {
+                  if (selectedSymptom != null) {
+                    if (!selectedSymptoms.contains(selectedSymptom)) {
+                      selectedSymptoms.add(selectedSymptom);
+                    }
+                  }
+                });
+              },
+              items: symptoms.map<DropdownMenuItem<String>>((String symptom) {
+                return DropdownMenuItem<String>(
+                  value: symptom,
+                  child: Text(symptom),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Selected Symptoms:',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8.0),
+            selectedSymptoms.isNotEmpty
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: selectedSymptoms.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(selectedSymptoms[index]),
+                        );
+                      },
+                    ),
+                  )
+                : Text('No symptoms selected'),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Use the selected symptoms for machine learning or any other purpose
+          // Here, we are just printing the selected symptoms
+          print(selectedSymptoms);
+        },
+        child: Icon(Icons.check),
       ),
     );
   }
