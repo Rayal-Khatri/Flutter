@@ -1,18 +1,13 @@
-#with open('D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.csv', 'r', encoding='utf-8') as file:
-input_file = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data.csv'
-output_file = 'D:/Rayal/Flutter/Flutter/symptom_analysis/assets/disease_data2.csv'
+import csv
 
-with open(input_file, 'r', encoding='utf-8') as file:
-    lines = file.readlines()
+# Specify the paths of the input and output files
+input_file = 'C:/Users/user/Desktop/Repositories/Flutter/symptom_analysis/assets/disease_data.csv'
+output_file = 'C:/Users/user/Desktop/Repositories/Flutter/symptom_analysis/assets/disease_data_utf8.csv'
 
-# Remove inconsistent quotation marks and strip whitespace
-updated_lines = [line.replace('"', '').strip() for line in lines]
+# Read the dataset using Windows-1252 encoding and write it in UTF-8 encoding
+with open(input_file, 'r', encoding='Windows-1252') as input_csv, open(output_file, 'w', encoding='utf-8', newline='') as output_csv:
+    writer = csv.writer(output_csv)
+    for row in csv.reader(input_csv):
+        writer.writerow(row)
 
-# Write the updated dataset to a new file
-with open(output_file, 'w', encoding='utf-8') as file:
-    file.write('\n'.join(updated_lines))
-
-print("Dataset formatting updated successfully.")
-
-
-
+print("Dataset converted successfully!")

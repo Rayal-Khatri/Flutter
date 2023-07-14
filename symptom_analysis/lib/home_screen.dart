@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:csv/csv.dart';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,25 +9,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<List<dynamic>> dataset = [];
+  List<List<dynamic>> data = [];
 
-  Future<void> loadDataset() async {
-    try {
-      String datasetPath = 'assets/disease_data.csv';
-      String data = await rootBundle.loadString(datasetPath);
-      List<List<dynamic>> csvTable = CsvToListConverter().convert(data);
-      setState(() {
-        dataset = csvTable;
-      });
-    } catch (e) {
-      print('Error loading dataset: $e');
-    }
+  Future<void> loadAsset() async {
+    final csvData = await rootBundle.loadString('assets/disease_data.csv');
+    List<List<dynamic>> csvTable = CsvToListConverter().convert(csvData);
+    setState(() {
+      data = csvTable;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    loadDataset();
+    loadAsset();
   }
 
   @override
@@ -35,21 +31,32 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Symptom Analysis'),
       ),
-      body: dataset.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columns: dataset[0]
-                    .map((item) => DataColumn(label: Text(item)))
-                    .toList(),
-                rows: dataset.sublist(1).map((row) {
-                  return DataRow(
-                    cells: row.map((item) => DataCell(Text(item))).toList(),
-                  );
-                }).toList(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: data.isNotEmpty
+            ? DataTable(
+                columns: List<DataColumn>.generate(
+                  data[0].length,
+                  (index) => DataColumn(
+                    label: Text(data[0][index].toString()),
+                  ),
+                ),
+                rows: List<DataRow>.generate(
+                  data.length > 1 ? data.length - 1 : 0,
+                  (index) => DataRow(
+                    cells: List<DataCell>.generate(
+                      data[index + 1].length,
+                      (cellIndex) => DataCell(
+                        Text(data[index + 1][cellIndex].toString()),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Center(
+                child: Text('No data available'),
               ),
-            ),
+      ),
     );
   }
 }
