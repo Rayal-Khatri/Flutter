@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       data = csvTable;
       symptoms = allSymptoms.cast<String>();
+      symptoms = symptoms.toSet().toList(); // Filter out repeating symptoms
     });
   }
 
