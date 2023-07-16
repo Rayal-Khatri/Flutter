@@ -1,13 +1,25 @@
-import csv
+import pandas as pd
+# Load the dataset
+df = pd.read_csv('C:/Users/user/Desktop/Repositories/Flutter/symptom_analysis/assets/disease_data.csv')
+# Extract the symptoms column
+symptoms = df['Symptoms']
 
-# Specify the paths of the input and output files
-input_file = 'C:/Users/user/Desktop/Repositories/Flutter/symptom_analysis/assets/disease_data.csv'
-output_file = 'C:/Users/user/Desktop/Repositories/Flutter/symptom_analysis/assets/disease_data_utf8.csv'
+# Create a set to store unique symptoms
+all_symptoms = set()
 
-# Read the dataset using Windows-1252 encoding and write it in UTF-8 encoding
-with open(input_file, 'r', encoding='Windows-1252') as input_csv, open(output_file, 'w', encoding='utf-8', newline='') as output_csv:
-    writer = csv.writer(output_csv)
-    for row in csv.reader(input_csv):
-        writer.writerow(row)
+# Iterate through the symptoms and add them to the set
+for s in symptoms:
+    # Remove the brackets and quotes from the symptom string
+    s = s.replace("[", "").replace("]", "").replace("'", "")
+    # Split the symptom string by commas
+    symptoms_list = [symptom.strip() for symptom in s.split(",")]
+    # Add each symptom to the set
+    all_symptoms.update(symptoms_list)
 
-print("Dataset converted successfully!")
+# Convert the set to a list and sort it
+all_symptoms = sorted(list(all_symptoms))
+
+# Print the list of symptoms
+print("List of Symptoms:")
+for symptom in all_symptoms:
+    print(symptom)

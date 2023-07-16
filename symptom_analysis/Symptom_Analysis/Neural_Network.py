@@ -25,8 +25,8 @@ model.fit(X, y)
 # Manually input the testing data
 test_data = [
     'Increased thirst and urination,Dermatitis on the paw pads,Loss of appetite, Jaundice',
-    "Red inflamed patches,Hot spots,Pain in the infected area,Red streaks on the skin",
-    "Limping, Muscle loss, Difficulty sitting"
+    "Swelling in the ear, Scratching,Head shakin, barking, pain in ear",
+    "Fever, Inflammation of the blood vessels,Disorientation,Coughing,Dilated pupils,Dull coat"
 ]
 
 # Vectorize the testing data
@@ -34,9 +34,15 @@ test_data_vectorized = vectorizer.transform(test_data)
 
 # Predict the diseases for the testing data
 predictions = model.predict(test_data_vectorized)
+probabilities = model.predict_proba(test_data_vectorized)
 
-# Print the predictions
-for symptom, prediction in zip(test_data, predictions):
+# Print the top 3 predicted diseases and their accuracies
+for symptom, prediction, probability in zip(test_data, predictions, probabilities):
+    top_3_indices = probability.argsort()[-3:][::-1]
+    top_3_diseases = model.classes_[top_3_indices]
+    top_3_accuracies = probability[top_3_indices]
+    
     print(f"Symptoms: {symptom}")
-    print(f"Predicted Disease: {prediction}")
+    for disease, accuracy in zip(top_3_diseases, top_3_accuracies):
+        print(f"Predicted Disease: {disease} (Accuracy: {accuracy:.2f})")
     print()
