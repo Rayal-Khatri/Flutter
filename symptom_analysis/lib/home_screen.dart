@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'Screen/predictions.dart';
 import 'load_dataset.dart';
 import 'package:symptom_analysis/Widget/Heading_text.dart';
 import 'package:symptom_analysis/Widget/symptom_dropdown.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<String> symptoms = [];
   List<String> selectedSymptoms = [];
+  bool isLoading = false; // Add isLoading variable
 
   @override
   void initState() {
@@ -27,6 +29,50 @@ class _HomeScreenState extends State<HomeScreen> {
       symptoms = loadedSymptoms;
       symptoms = symptoms.toSet().toList(); // Filter out repeating symptoms
     });
+  }
+
+  void predictDiseases() async {
+    setState(() {
+      isLoading = true; // Set isLoading to true when starting prediction
+    });
+
+    final jsonData = {
+      "test_data": [selectedSymptoms.join(', ')],
+    };
+    final jsonString = jsonEncode(jsonData);
+
+    print(jsonString); // Print the JSON payload
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:8000/Predict/'),
+        body: jsonString,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        print(responseData); // Print the obtained result
+
+        // Navigate to the PredictionScreen with the obtained predictions
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PredictionScreen(predictions: responseData),
+          ),
+        );
+      } else {
+        // Handle error
+      }
+    } catch (e) {
+      // Handle error
+    } finally {
+      setState(() {
+        isLoading = false; // Set isLoading to false when prediction is complete
+      });
+    }
   }
 
   @override
@@ -67,35 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Convert selected symptoms to a single string separated by commas
-          final jsonData = {
-            "test_data": [selectedSymptoms.join(', ')],
-          };
-          final jsonString = jsonEncode(jsonData);
-
-          print(jsonString); // Print the JSON payload
-
-          // Send the JSON payload to the API endpoint
-          http.post(
-            Uri.parse('http://127.0.0.1:8000/Predict/'),
-            body: jsonString,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          ).then((response) {
-            // Handle the response here
-            if (response.statusCode == 200) {
-              // Success
-              final responseData = jsonDecode(response.body);
-              print(responseData); // Print the obtained result
-              // Process the response data
-            } else {
-              // Failed
-              // Handle error
-            }
-          });
+          predictDiseases(); // Call the predictDiseases method when button is pressed
         },
-        child: Icon(Icons.check),
+        child: isLoading ? CircularProgressIndicator() : Icon(Icons.check),
       ),
     );
   }
