@@ -6,6 +6,7 @@ import 'load_dataset.dart';
 import 'package:symptom_analysis/Widget/Heading_text.dart';
 import 'package:symptom_analysis/Widget/symptom_dropdown.dart';
 import 'package:symptom_analysis/Widget/symptom_list.dart';
+import 'package:symptom_analysis/Widget/loading_popup.dart'; // Import the LoadingPopup widget
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<String> symptoms = [];
   List<String> selectedSymptoms = [];
-  bool isLoading = false; // Add isLoading variable
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -27,13 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
     List<String> loadedSymptoms = await loadDataset();
     setState(() {
       symptoms = loadedSymptoms;
-      symptoms = symptoms.toSet().toList(); // Filter out repeating symptoms
+      symptoms = symptoms.toSet().toList();
     });
   }
 
   void predictDiseases() async {
     setState(() {
-      isLoading = true; // Set isLoading to true when starting prediction
+      isLoading = true;
     });
 
     final jsonData = {
@@ -41,9 +42,15 @@ class _HomeScreenState extends State<HomeScreen> {
     };
     final jsonString = jsonEncode(jsonData);
 
-    print(jsonString); // Print the JSON payload
+    print(jsonString);
 
     try {
+      showDialog(
+        context: context,
+        builder: (_) => LoadingPopup(), // Show the LoadingPopup
+        barrierDismissible: false,
+      );
+
       final response = await http.post(
         Uri.parse('http://10.0.2.2:8000/Predict/'),
         body: jsonString,
@@ -52,11 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
 
+      Navigator.pop(context);
+
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        print(responseData); // Print the obtained result
+        print(responseData);
 
-        // Navigate to the PredictionScreen with the obtained predictions
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -70,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Handle error
     } finally {
       setState(() {
-        isLoading = false; // Set isLoading to false when prediction is complete
+        isLoading = false;
       });
     }
   }
@@ -113,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          predictDiseases(); // Call the predictDiseases method when button is pressed
+          predictDiseases();
         },
         child: isLoading ? CircularProgressIndicator() : Icon(Icons.check),
       ),
