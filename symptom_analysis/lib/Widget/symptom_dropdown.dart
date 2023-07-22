@@ -21,46 +21,34 @@ class SymptomDropdown extends StatefulWidget {
 class _SymptomDropdownState extends State<SymptomDropdown> {
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  List<String> _filteredSymptoms = [];
   String? _selectedSymptom;
+  List<String> _filteredSymptoms = [];
 
   @override
   void initState() {
     super.initState();
-    _textEditingController.text = widget.value ?? '';
-    _selectedSymptom = widget.value;
+    _textEditingController.addListener(_onSearchTextChanged);
   }
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    _focusNode.dispose();
-    super.dispose();
+  void _onSearchTextChanged() {
+    setState(() {
+      _filteredSymptoms = widget.symptoms
+          .where((symptom) => symptom
+              .toLowerCase()
+              .contains(_textEditingController.text.toLowerCase()))
+          .toList();
+    });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          controller: _textEditingController,
-          focusNode: _focusNode,
-          decoration: InputDecoration(
-            hintText: widget.hint,
-          ),
-          onChanged: (text) {
-            setState(() {
-              _filteredSymptoms = widget.symptoms
-                  .where((symptom) =>
-                      symptom.toLowerCase().contains(text.toLowerCase()))
-                  .toList();
-            });
-          },
-        ),
-        _buildDropdownList(),
-      ],
-    );
+  void _onDropdownSelected(String? value) {
+    setState(() {
+      _selectedSymptom = value;
+      _filteredSymptoms.clear();
+      widget.onChanged(_selectedSymptom);
+
+      // Clear the input field after selecting a symptom
+      _textEditingController.clear();
+    });
   }
 
   Widget _buildDropdownList() {
@@ -80,18 +68,36 @@ class _SymptomDropdownState extends State<SymptomDropdown> {
             return ListTile(
               title: Text(symptom),
               onTap: () {
-                setState(() {
-                  _textEditingController.text = symptom;
-                  _focusNode.unfocus(); // Clear focus to hide the keyboard
-                  _selectedSymptom = symptom;
-                  _filteredSymptoms.clear();
-                  widget.onChanged(_selectedSymptom);
-                });
+                _onDropdownSelected(symptom);
+                _focusNode.unfocus(); // Clear focus to hide the keyboard
               },
             );
           },
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: _textEditingController,
+          focusNode: _focusNode,
+          onChanged: (value) {
+            setState(() {
+              _onSearchTextChanged();
+            });
+          },
+          decoration: InputDecoration(
+            hintText: widget.hint,
+            suffixIcon: Icon(Icons.search),
+          ),
+        ),
+        _buildDropdownList(),
+      ],
     );
   }
 }
