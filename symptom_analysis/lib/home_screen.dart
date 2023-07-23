@@ -121,7 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          predictDiseases();
+          if (selectedSymptoms.isEmpty) {
+            // Show a snackbar message to enter a symptom
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Please enter a symptom.'),
+              ),
+            );
+          } else {
+            predictDiseases();
+          }
         },
         child: isLoading ? CircularProgressIndicator() : Icon(Icons.check),
       ),

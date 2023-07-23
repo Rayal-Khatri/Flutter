@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:symptom_analysis/Widget/Heading_text.dart';
 
 class PredictionScreen extends StatelessWidget {
   final List<dynamic> predictions;
@@ -20,18 +22,34 @@ class PredictionScreen extends StatelessWidget {
           final diseaseWidgets = prediction.map<Widget>((p) {
             final disease = p['Disease'];
             final accuracy = p['Accuracy'];
-            return ListTile(
-              title: Text('Disease: $disease'),
-              subtitle: Text('Accuracy: $accuracy'),
+            final accuracyPercentage = (accuracy * 100).toStringAsFixed(1);
+
+            return Column(
+              children: [
+                ListTile(
+                  title: SymptomsTitle(text: "$disease :"),
+                ),
+                CircularPercentIndicator(
+                  radius: 200,
+                  lineWidth: 25,
+                  backgroundColor: Color.fromARGB(255, 122, 179, 232),
+                  percent: accuracy, // Ensure accuracy is between 0 and 1
+                  circularStrokeCap: CircularStrokeCap.round,
+                  center: Text(
+                    "$accuracyPercentage%", // Display the percentage with % symbol
+                    style: TextStyle(fontSize: 65, color: Colors.blue),
+                  ),
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                )
+              ],
             );
           }).toList();
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                title: Text('Prediction ${index + 1}:'),
-              ),
               ...diseaseWidgets,
               Divider(),
             ],
