@@ -37,7 +37,7 @@ class PredictionScreen extends StatelessWidget {
                   circularStrokeCap: CircularStrokeCap.round,
                   center: Text(
                     "$accuracyPercentage%", // Display the percentage with % symbol
-                    style: TextStyle(fontSize: 65, color: Colors.blue),
+                    style: TextStyle(fontSize: 45, color: Colors.blue),
                   ),
                   progressColor: Colors.blue[700],
                   animation: true,
