@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class SymptomList extends StatelessWidget {
   final List<String> selectedSymptoms;
-  final Function(String) onRemove;
+  final void Function(String symptom) onRemove; // Add onRemove parameter
 
-  const SymptomList(
-      {Key? key, required this.selectedSymptoms, required this.onRemove})
-      : super(key: key);
+  const SymptomList({
+    Key? key,
+    required this.selectedSymptoms,
+    required this.onRemove,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +16,13 @@ class SymptomList extends StatelessWidget {
       child: ListView.builder(
         itemCount: selectedSymptoms.length,
         itemBuilder: (context, index) {
+          final symptom = selectedSymptoms[index];
           return ListTile(
-            title: Text(selectedSymptoms[index]),
+            title: Text(symptom),
             trailing: IconButton(
               icon: Icon(Icons.clear),
-              onPressed: () => onRemove(selectedSymptoms[index]),
+              onPressed: () => onRemove(
+                  symptom), // Call onRemove when the clear button is pressed
             ),
           );
         },
