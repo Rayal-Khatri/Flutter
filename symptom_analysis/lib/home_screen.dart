@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'Screen/predictions.dart';
+import 'Widget/loading_popup.dart';
 import 'load_dataset.dart';
 import 'package:symptom_analysis/Widget/Heading_text.dart';
 import 'package:symptom_analysis/Widget/symptom_dropdown.dart';
@@ -44,9 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     final jsonData = {
-      "test_data": [selectedSymptoms.join(', ')],
+      "test_data": selectedSymptoms,
     };
     final jsonString = jsonEncode(jsonData);
+    print(jsonString);
 
     try {
       final response = await http.post(
@@ -121,6 +122,34 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (selectedSymptoms.isNotEmpty) {
+            showDialog(
+              context: context,
+              barrierDismissible: false, // Prevent dismissing during loading
+              builder: (BuildContext context) {
+                return LoadingPopup(); // Show loading popup while predicting
+              },
+            );
+
+            Future.delayed(Duration(seconds: 5), () {
+              Navigator.pop(context); // Dismiss loading popup
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Process Failed'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            });
+
             predictDiseases();
           } else {
             showDialog(

@@ -13,11 +13,14 @@ class LoadingPopup extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: Image.asset(
-            'assets/cat.gif',
-            height: 200,
-            width: 200,
-            fit: BoxFit.cover,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(
+              'assets/cat.gif',
+              height: 200,
+              width: 200,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),

@@ -18,40 +18,30 @@ class PredictionScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: predictions.length,
         itemBuilder: (context, index) {
-          final prediction = predictions[index]['Predictions'];
-          final diseaseWidgets = prediction.map<Widget>((p) {
-            final disease = p['Disease'];
-            final accuracy = p['Accuracy'];
-            final accuracyPercentage = (accuracy * 100).toStringAsFixed(1);
-
-            return Column(
-              children: [
-                ListTile(
-                  title: SymptomsTitle(text: "$disease :"),
-                ),
-                CircularPercentIndicator(
-                  radius: 200,
-                  lineWidth: 25,
-                  backgroundColor: Color.fromARGB(255, 122, 179, 232),
-                  percent: accuracy, // Ensure accuracy is between 0 and 1
-                  circularStrokeCap: CircularStrokeCap.round,
-                  center: Text(
-                    "$accuracyPercentage%", // Display the percentage with % symbol
-                    style: TextStyle(fontSize: 45, color: Colors.blue),
-                  ),
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                )
-              ],
-            );
-          }).toList();
+          final prediction = predictions[index];
+          final disease = prediction['Disease'];
+          final accuracy = prediction['Probability'];
+          final accuracyPercentage = (accuracy * 100).toStringAsFixed(1);
 
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...diseaseWidgets,
-              Divider(),
+              ListTile(
+                title: SymptomsTitle(text: "$disease :"),
+              ),
+              CircularPercentIndicator(
+                radius: 200,
+                lineWidth: 25,
+                backgroundColor: Color.fromARGB(255, 122, 179, 232),
+                percent: accuracy, // Ensure accuracy is between 0 and 1
+                circularStrokeCap: CircularStrokeCap.round,
+                center: Text(
+                  "$accuracyPercentage%", // Display the percentage with % symbol
+                  style: TextStyle(fontSize: 45, color: Colors.blue),
+                ),
+                progressColor: Colors.blue[700],
+                animation: true,
+                animationDuration: 1000,
+              )
             ],
           );
         },
