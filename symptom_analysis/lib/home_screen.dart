@@ -130,26 +130,6 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             );
 
-            Future.delayed(Duration(seconds: 5), () {
-              Navigator.pop(context); // Dismiss loading popup
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('Process Failed'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            });
-
             predictDiseases();
           } else {
             showDialog(

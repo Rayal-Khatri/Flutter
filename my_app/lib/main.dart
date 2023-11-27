@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Pages/Home/Pets_to_adopt.dart';
+import 'package:my_app/Pages/Home/home.dart';
 import 'package:my_app/Pages/Shelthers/Adoption_Pet_Details.dart';
+import 'Helper/Dependencies.dart' as dep;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -19,6 +24,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: AdoptionPetDetails());
+        home: MainPetPage());
+    //AdoptionPetDetails
+    //MainPetPage
   }
 }

@@ -61,7 +61,7 @@ class AdoptionPetDetails extends StatelessWidget {
                 Container(
                   child: ExpandableTextWidget(
                       text:
-                          "Meet Ginger, a charming 2-week-old ginger cat eagerly seeking a forever home. With its vibrant orange coat and adorable round eyes, Ginger is an absolute delight. This playful and curious feline is full of energy, ready to explore and bring joy to its new family. Despite its young age, Ginger is already displaying a friendly and affectionate nature, making it the perfect companion for both adults and children. If you're looking for a furry friend who will bring warmth and happiness to your home, don't miss the chance to give Ginger a loving and caring forever home"),
+                          "Meet Ginger, a charming 2-week-old ginger cat eagerly seeking a forever home. With its vibrant orange coat and adorable round eyes, Ginger is an absolute delight. This playful and curious feline is full of energy, ready to explore and bring joy to its new family. Despite its young age, Ginger is already displaying a friendly and affectionate nature, making it the perfect companion for both adults and children. If you're looking for a furry friend who will bring warmth and happiness to your home, don't miss the chance to give Ginger a loving and cark-old ginger cat eagerly seeking a forever home. With its vibrant orange coat and adorable round eyes, Ginger is an absolute delight. This playful and curious feline is full of energy, ready to explore and bring joy to its new family. Despite its young age, Ginger is already displaying a friendly and affectionate nature, making it the perfect companion for both adults and children. If you're looking for a furry friend who will bring warmth and happiness to your home, don't miss the chance to give Ginger a loving and caring forever home"),
                   margin: EdgeInsets.only(
                       left: Dimensions.height20, right: Dimensions.height20),
                 ),
@@ -97,6 +97,7 @@ class AdoptionPetDetails extends StatelessWidget {
                 child: AppIcon(
                   icon: Icons.favorite,
                   iconColor: AppColors.mainColor,
+                  iconSize: Dimensions.height30,
                 )),
             Container(
               padding: EdgeInsets.only(
@@ -106,6 +107,7 @@ class AdoptionPetDetails extends StatelessWidget {
                 right: Dimensions.height20,
               ),
               child: BigText(
+                size: 18,
                 text: "Fill Adoption Form",
                 color: Colors.white,
               ),
