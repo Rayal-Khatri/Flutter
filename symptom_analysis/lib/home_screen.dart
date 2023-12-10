@@ -60,12 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PredictionScreen(predictions: responseData),
           ),
         );
+        Navigator.pop(context);
       } else {
         // Handle error
       }
@@ -126,10 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
               context: context,
               barrierDismissible: false, // Prevent dismissing during loading
               builder: (BuildContext context) {
-                return LoadingPopup(); // Show loading popup while predicting
+                return LoadingPopup(); // This will dismiss the loading dialog
+                // Show loading popup while predicting
               },
             );
-
             predictDiseases();
           } else {
             showDialog(
