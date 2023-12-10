@@ -18,7 +18,7 @@ class PopularProductController extends GetxController {
       _popularProductList = adoption.dogs ?? []; // Ensure it's not null
       update();
     } else {
-      print("Getting them failed");
+      print("Failed!");
     }
   }
 }
