@@ -12,10 +12,11 @@ class PopularProductController extends GetxController {
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
-      print("Got Products");
+      // print("Got Products");
       Map<String, dynamic> responseBody = response.body as Map<String, dynamic>;
       Adoption adoption = Adoption.fromJson(responseBody);
       _popularProductList = adoption.dogs ?? []; // Ensure it's not null
+      print(_popularProductList);
       update();
     } else {
       print("Failed!");

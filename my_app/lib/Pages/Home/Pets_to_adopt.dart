@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/App_column.dart';
@@ -40,27 +42,36 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          // color: Colors.red,
-          height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
-        new DotsIndicator(
-          dotsCount: 5,
-          position: _currPageValue,
-          decorator: DotsDecorator(
-            size: const Size.square(9.0),
-            activeColor: AppColors.mainColor,
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
+        GetBuilder<PopularProductController>(builder: (popularPets) {
+          return Container(
+            // color: Colors.red,
+            height: Dimensions.pageView,
+            child: PageView.builder(
+                controller: pageController,
+                itemCount: popularPets.popularProductList.isEmpty
+                    ? 1
+                    : popularPets.popularProductList.length,
+                itemBuilder: (context, position) {
+                  return _buildPageItem(
+                      position, popularPets.popularProductList[position]);
+                }),
+          );
+        }),
+        GetBuilder<PopularProductController>(builder: (popularPets) {
+          return DotsIndicator(
+            dotsCount: popularPets.popularProductList.isEmpty
+                ? 1
+                : popularPets.popularProductList.length,
+            position: _currPageValue,
+            decorator: DotsDecorator(
+              size: const Size.square(9.0),
+              activeColor: AppColors.mainColor,
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
+          );
+        }),
         //Gap
         SizedBox(height: Dimensions.height30),
         //Text
@@ -163,7 +174,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, popularProductList) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -226,7 +237,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                     left: Dimensions.height10,
                     right: Dimensions.height10),
                 child: AppColumn(
-                  text: "Shena's Care",
+                  text: popularProductList.name,
                 ),
               ),
             ),
