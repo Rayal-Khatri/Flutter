@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Utils/Colors.dart';
+import 'package:my_app/Utils/appConstants.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/App_column.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
@@ -210,7 +211,9 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/Images/shelther1.jpg")),
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.ADOPT_PET_URL +
+                      popularProductList.name)),
             ),
           ),
           Align(

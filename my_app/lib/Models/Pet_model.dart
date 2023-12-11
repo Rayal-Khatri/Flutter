@@ -45,6 +45,7 @@ class Dogs {
   String? _name;
   String? _shelter;
   String? _breed;
+  String? _img;
   String? _size;
   int? _age;
   String? _personality;
@@ -57,6 +58,7 @@ class Dogs {
       {String? name,
       String? shelter,
       String? breed,
+      String? img,
       String? size,
       int? age,
       String? personality,
@@ -72,6 +74,9 @@ class Dogs {
     }
     if (breed != null) {
       this._breed = breed;
+    }
+    if (img != null) {
+      this._img = img;
     }
     if (size != null) {
       this._size = size;
@@ -102,6 +107,8 @@ class Dogs {
   set shelter(String? shelter) => _shelter = shelter;
   String? get breed => _breed;
   set breed(String? breed) => _breed = breed;
+  String? get img => _img;
+  set img(String? img) => _img = img;
   String? get size => _size;
   set size(String? size) => _size = size;
   int? get age => _age;
@@ -121,6 +128,7 @@ class Dogs {
     _name = json['name'];
     _shelter = json['shelter'];
     _breed = json['breed'];
+    _img = json['img'];
     _size = json['size'];
     _age = json['age'];
     _personality = json['personality'];
@@ -141,6 +149,7 @@ class Dogs {
     data['name'] = this._name;
     data['shelter'] = this._shelter;
     data['breed'] = this._breed;
+    data['img'] = this._img;
     data['size'] = this._size;
     data['age'] = this._age;
     data['personality'] = this._personality;
