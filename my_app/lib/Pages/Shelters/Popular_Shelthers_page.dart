@@ -6,8 +6,8 @@ import 'package:my_app/Widgets/App_icon.dart';
 import 'package:my_app/Widgets/Expandable_text.dart';
 import '../../Widgets/Big_texts.dart';
 
-class PopularShelther extends StatelessWidget {
-  const PopularShelther({super.key});
+class PopularShelter extends StatelessWidget {
+  const PopularShelter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class PopularShelther extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/Images/shelther1.jpg'))),
+                      image: AssetImage('assets/Images/Shelther1.jpg'))),
             ),
           ),
           //Icon Widget

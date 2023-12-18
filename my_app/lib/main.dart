@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
-import 'package:my_app/Pages/Home/Pets_to_adopt.dart';
+import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Pages/Home/home.dart';
-import 'package:my_app/Pages/Shelthers/Adoption_Pet_Details.dart';
 import 'Helper/Dependencies.dart' as dep;
 
 void main() async {
@@ -20,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<ShelterController>().getShelterList();
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Passenger Counter',

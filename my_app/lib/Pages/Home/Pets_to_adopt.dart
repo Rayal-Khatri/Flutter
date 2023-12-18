@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
+import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/appConstants.dart';
 import 'package:my_app/Utils/dimentions.dart';
@@ -44,19 +45,23 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
     return Column(
       children: [
         GetBuilder<PopularProductController>(builder: (popularPets) {
-          return Container(
-            // color: Colors.red,
-            height: Dimensions.pageView,
-            child: PageView.builder(
-                controller: pageController,
-                itemCount: popularPets.popularProductList.isEmpty
-                    ? 1
-                    : popularPets.popularProductList.length,
-                itemBuilder: (context, position) {
-                  return _buildPageItem(
-                      position, popularPets.popularProductList[position]);
-                }),
-          );
+          return popularPets.isLoaded
+              ? Container(
+                  // color: Colors.red,
+                  height: Dimensions.pageView,
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularPets.popularProductList.isEmpty
+                          ? 1
+                          : popularPets.popularProductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(
+                            position, popularPets.popularProductList[position]);
+                      }),
+                )
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
         }),
         GetBuilder<PopularProductController>(builder: (popularPets) {
           return DotsIndicator(
