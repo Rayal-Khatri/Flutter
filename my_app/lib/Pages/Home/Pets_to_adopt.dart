@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Controllers/Shelter_controller.dart';
+import 'package:my_app/Routes/route_helper.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/appConstants.dart';
 import 'package:my_app/Utils/dimentions.dart';
@@ -10,6 +11,9 @@ import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
+
+import '../Shelters/Adoption_Pet_Details.dart';
+import '../Shelters/Popular_Shelthers_page.dart';
 
 class PetAdoptChoices extends StatefulWidget {
   const PetAdoptChoices({Key? key}) : super(key: key);
@@ -49,15 +53,19 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               ? Container(
                   // color: Colors.red,
                   height: Dimensions.pageView,
-                  child: PageView.builder(
-                      controller: pageController,
-                      itemCount: popularPets.shelterList.isEmpty
-                          ? 1
-                          : popularPets.shelterList.length,
-                      itemBuilder: (context, position) {
-                        return _buildPageItem(
-                            position, popularPets.shelterList[position]);
-                      }),
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.getShelter());
+                      },
+                      child: PageView.builder(
+                          controller: pageController,
+                          itemCount: popularPets.shelterList.isEmpty
+                              ? 1
+                              : popularPets.shelterList.length,
+                          itemBuilder: (context, position) {
+                            return _buildPageItem(
+                                position, popularPets.shelterList[position]);
+                          })),
                 )
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
@@ -87,7 +95,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               children: [
-                BigText(text: "Popular"),
+                BigText(text: "Avaliabe"),
                 SizedBox(
                   width: Dimensions.height10,
                 ),
@@ -97,85 +105,108 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               ]),
         ),
         //List of pets avaliable
-        ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.height20,
-                    right: Dimensions.height20,
-                    bottom: Dimensions.height10),
-                child: Row(
-                  children: [
-                    //Image Section
-                    Container(
-                      height: Dimensions.ListViewImgSize,
-                      width: Dimensions.ListViewImgSize,
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.height20),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/Images/cat1.jpg"))),
-                    ),
-                    //Text Container
-                    Expanded(
-                      child: Container(
-                        height: Dimensions.ListViewTextContSize,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.height20),
-                              bottomRight:
-                                  Radius.circular(Dimensions.height20)),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.height10,
-                              right: Dimensions.height5),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                //Text Title for Pet Name
-                                BigText(text: "New Kittens Avaliable"),
-                                SizedBox(
-                                  height: Dimensions.height10,
+        GetBuilder<PopularProductController>(builder: (Avaliable) {
+          return Avaliable.isLoaded
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: Avaliable.popularProductList.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RouteHelper.getDogs());
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              left: Dimensions.height20,
+                              right: Dimensions.height20,
+                              bottom: Dimensions.height10),
+                          child: Row(
+                            children: [
+                              //Image Section
+                              Container(
+                                height: Dimensions.ListViewImgSize,
+                                width: Dimensions.ListViewImgSize,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.height20),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            AppConstants.BASE_URL +
+                                                AppConstants.ADOPT_PET_URL +
+                                                Avaliable
+                                                    .popularProductList[index]
+                                                    .img!))),
+                              ),
+                              //Text Container
+                              Expanded(
+                                child: Container(
+                                  height: Dimensions.ListViewTextContSize,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(
+                                            Dimensions.height20),
+                                        bottomRight: Radius.circular(
+                                            Dimensions.height20)),
+                                    color: Colors.white,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: Dimensions.height10,
+                                        right: Dimensions.height5),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          //Text Title for Pet Name
+                                          BigText(
+                                              text: Avaliable
+                                                  .popularProductList[index]
+                                                  .name!),
+                                          SizedBox(
+                                            height: Dimensions.height10,
+                                          ),
+                                          //Shelther name
+                                          SmallText(text: "Shena's Care"),
+                                          SizedBox(
+                                            height: Dimensions.height10,
+                                          ),
+                                          //Icons And Locations
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              IconAndText(
+                                                  icon: Icons.circle_sharp,
+                                                  text: " Normal",
+                                                  iconColor:
+                                                      AppColors.iconColor1),
+                                              IconAndText(
+                                                  icon: Icons.gps_fixed_sharp,
+                                                  text: " 2.1Km",
+                                                  iconColor:
+                                                      AppColors.mainColor),
+                                              IconAndText(
+                                                  icon: Icons
+                                                      .access_alarm_rounded,
+                                                  text: " 3.2 mins",
+                                                  iconColor:
+                                                      AppColors.iconColor2),
+                                            ],
+                                          )
+                                        ]),
+                                  ),
                                 ),
-                                //Shelther name
-                                SmallText(text: "Shena's Care"),
-                                SizedBox(
-                                  height: Dimensions.height10,
-                                ),
-                                //Icons And Locations
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    IconAndText(
-                                        icon: Icons.circle_sharp,
-                                        text: " Normal",
-                                        iconColor: AppColors.iconColor1),
-                                    IconAndText(
-                                        icon: Icons.gps_fixed_sharp,
-                                        text: " 2.1Km",
-                                        iconColor: AppColors.mainColor),
-                                    IconAndText(
-                                        icon: Icons.access_alarm_rounded,
-                                        text: " 3.2 mins",
-                                        iconColor: AppColors.iconColor2),
-                                  ],
-                                )
-                              ]),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }),
+                              )
+                            ],
+                          ),
+                        ));
+                  })
+              : CircularProgressIndicator(color: AppColors.mainColor);
+        })
       ],
     );
   }

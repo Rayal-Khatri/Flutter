@@ -4,6 +4,7 @@ import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Pages/Home/home.dart';
 import 'Helper/Dependencies.dart' as dep;
+import 'Routes/route_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,13 +22,12 @@ class MyApp extends StatelessWidget {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<ShelterController>().getShelterList();
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Passenger Counter',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: MainPetPage());
+      debugShowCheckedModeBanner: false,
+      title: 'Hello Pet',
+      home: MainPetPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
+    );
     //AdoptionPetDetails
     //MainPetPage
   }

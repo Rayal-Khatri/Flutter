@@ -18,11 +18,10 @@ class ShelterController extends GetxController {
       Map<String, dynamic> responseBody = response.body as Map<String, dynamic>;
       Shelters_adopt shelthers = Shelters_adopt.fromJson(responseBody);
       _shelterList = shelthers.shelter ?? []; // Ensure it's not null
-      print(shelterList);
       _isLoaded = true;
       update();
     } else {
-      print("Shelther Failed!");
+      print("Getting Shelther Failed!");
     }
   }
 }
