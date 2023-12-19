@@ -3,6 +3,7 @@ class Adoption {
   int? _offset;
   late List<Dogs>? _dogs;
   List<Dogs>? get dogs => _dogs;
+
   Adoption({required totalSize, required offset, required List<Dogs>? dogs}) {
     if (totalSize != null) {
       this._totalSize = totalSize;

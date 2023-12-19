@@ -16,12 +16,13 @@ class ShelterController extends GetxController {
     Response response = await shelterRepo.getShelterList();
     if (response.statusCode == 200) {
       Map<String, dynamic> responseBody = response.body as Map<String, dynamic>;
-      Shelters_to_adopt adoption = Shelters_to_adopt.fromJson(responseBody);
-      _shelterList = adoption.shelters ?? []; // Ensure it's not null
+      Shelters_adopt shelthers = Shelters_adopt.fromJson(responseBody);
+      _shelterList = shelthers.shelter ?? []; // Ensure it's not null
+      print(shelterList);
       _isLoaded = true;
       update();
     } else {
-      print("Failed!");
+      print("Shelther Failed!");
     }
   }
 }

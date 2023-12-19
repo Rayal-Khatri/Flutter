@@ -44,30 +44,30 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GetBuilder<PopularProductController>(builder: (popularPets) {
+        GetBuilder<ShelterController>(builder: (popularPets) {
           return popularPets.isLoaded
               ? Container(
                   // color: Colors.red,
                   height: Dimensions.pageView,
                   child: PageView.builder(
                       controller: pageController,
-                      itemCount: popularPets.popularProductList.isEmpty
+                      itemCount: popularPets.shelterList.isEmpty
                           ? 1
-                          : popularPets.popularProductList.length,
+                          : popularPets.shelterList.length,
                       itemBuilder: (context, position) {
                         return _buildPageItem(
-                            position, popularPets.popularProductList[position]);
+                            position, popularPets.shelterList[position]);
                       }),
                 )
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
                 );
         }),
-        GetBuilder<PopularProductController>(builder: (popularPets) {
+        GetBuilder<ShelterController>(builder: (popularPets) {
           return DotsIndicator(
-            dotsCount: popularPets.popularProductList.isEmpty
+            dotsCount: popularPets.shelterList.isEmpty
                 ? 1
-                : popularPets.popularProductList.length,
+                : popularPets.shelterList.length,
             position: _currPageValue,
             decorator: DotsDecorator(
               size: const Size.square(9.0),
@@ -180,7 +180,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
     );
   }
 
-  Widget _buildPageItem(int index, popularProductList) {
+  Widget _buildPageItem(int index, sheltherList) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -217,8 +217,8 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(AppConstants.BASE_URL +
-                      AppConstants.ADOPT_PET_URL +
-                      popularProductList.name)),
+                      AppConstants.SHELTER_URL +
+                      sheltherList.img)),
             ),
           ),
           Align(
@@ -245,7 +245,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                     left: Dimensions.height10,
                     right: Dimensions.height10),
                 child: AppColumn(
-                  text: popularProductList.name,
+                  text: sheltherList.name,
                 ),
               ),
             ),

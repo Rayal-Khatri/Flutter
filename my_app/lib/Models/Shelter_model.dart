@@ -1,18 +1,19 @@
-class Shelters_to_adopt {
+class Shelters_adopt {
   int? _totalSize;
   int? _offset;
-  List<Shelters>? _shelters;
-  List<Shelters>? get shelters => _shelters;
+  late List<Shelter>? _shelter;
+  List<Shelter>? get shelter => _shelter;
 
-  Shelters_to_adopt({required totalSize, required offset, required shelters}) {
+  Shelters_adopt(
+      {required totalSize, required offset, required List<Shelter>? shelter}) {
     if (totalSize != null) {
       this._totalSize = totalSize;
     }
     if (offset != null) {
       this._offset = offset;
     }
-    if (shelters != null) {
-      this._shelters = shelters;
+    if (shelter != null) {
+      this._shelter = shelter;
     }
   }
 
@@ -20,22 +21,21 @@ class Shelters_to_adopt {
   set totalSize(int? totalSize) => _totalSize = totalSize;
   int? get offset => _offset;
   set offset(int? offset) => _offset = offset;
+  set shelter(List<Shelter>? shelter) => _shelter = shelter;
 
-  set shelters(List<Shelters>? shelters) => _shelters = shelters;
-
-  Shelters_to_adopt.fromJson(Map<String, dynamic> json) {
+  Shelters_adopt.fromJson(Map<String, dynamic> json) {
     _totalSize = json['totalSize'];
     _offset = json['offset'];
-    if (json['shelters'] != null) {
-      _shelters = <Shelters>[];
-      json['shelters'].forEach((v) {
-        _shelters!.add(new Shelters.fromJson(v));
+    if (json['shelter'] != null) {
+      _shelter = <Shelter>[];
+      json['shelter'].forEach((v) {
+        _shelter!.add(new Shelter.fromJson(v));
       });
     }
   }
 }
 
-class Shelters {
+class Shelter {
   String? _name;
   String? _location;
   double? _rating;
@@ -44,7 +44,7 @@ class Shelters {
   String? _description;
   List<String>? _facilities;
 
-  Shelters(
+  Shelter(
       {String? name,
       String? location,
       double? rating,
@@ -90,7 +90,7 @@ class Shelters {
   List<String>? get facilities => _facilities;
   set facilities(List<String>? facilities) => _facilities = facilities;
 
-  Shelters.fromJson(Map<String, dynamic> json) {
+  Shelter.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _location = json['location'];
     _rating = json['rating'];
