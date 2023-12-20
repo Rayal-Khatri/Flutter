@@ -6,7 +6,7 @@ class AppConstants {
 
   static const String ADOPT_PET_URL = "/dogs/";
 
-  static const String SHELTER_URL = "/Shelthers/";
+  static const String SHELTER_URL = "/Shelters/";
 
   static const String TOKEN = "9841";
 }

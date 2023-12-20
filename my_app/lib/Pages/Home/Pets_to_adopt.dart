@@ -12,9 +12,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
 
-import '../Shelters/Adoption_Pet_Details.dart';
-import '../Shelters/Popular_Shelthers_page.dart';
-
 class PetAdoptChoices extends StatefulWidget {
   const PetAdoptChoices({Key? key}) : super(key: key);
 
@@ -53,19 +50,15 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
               ? Container(
                   // color: Colors.red,
                   height: Dimensions.pageView,
-                  child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.getShelter());
-                      },
-                      child: PageView.builder(
-                          controller: pageController,
-                          itemCount: popularPets.shelterList.isEmpty
-                              ? 1
-                              : popularPets.shelterList.length,
-                          itemBuilder: (context, position) {
-                            return _buildPageItem(
-                                position, popularPets.shelterList[position]);
-                          })),
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularPets.shelterList.isEmpty
+                          ? 1
+                          : popularPets.shelterList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(
+                            position, popularPets.shelterList[position]);
+                      }),
                 )
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
@@ -238,18 +231,23 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
     return Transform(
         transform: matrix,
         child: Stack(children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(
-                left: Dimensions.height10, right: Dimensions.height10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.height30),
-              color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(AppConstants.BASE_URL +
-                      AppConstants.SHELTER_URL +
-                      sheltherList.img)),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.getShelter(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(
+                  left: Dimensions.height10, right: Dimensions.height10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.height30),
+                color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(AppConstants.BASE_URL +
+                        AppConstants.SHELTER_URL +
+                        sheltherList.img)),
+              ),
             ),
           ),
           Align(

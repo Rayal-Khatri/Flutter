@@ -21,7 +21,7 @@ class PopularProductController extends GetxController {
       _isLoaded = true;
       update();
     } else {
-      print("Failed!");
+      print("Getting Pets Failed!");
     }
   }
 }

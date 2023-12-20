@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_app/Pages/Home/home.dart';
 import 'package:my_app/Pages/Shelters/Popular_Shelthers_page.dart';
-
 import '../Pages/Shelters/Adoption_Pet_Details.dart';
 
 class RouteHelper {
@@ -10,7 +9,7 @@ class RouteHelper {
   static const String Dogs = "/Dogs";
 
   static String getInitial() => '$initial';
-  static String getShelter() => '$Shelters';
+  static String getShelter(int pageID) => '$Shelters?pageID=$pageID';
   static String getDogs() => '$Dogs';
 
   static List<GetPage> routes = [
@@ -18,7 +17,8 @@ class RouteHelper {
     GetPage(
         name: Shelters,
         page: () {
-          return PopularShelter();
+          var pageID = Get.parameters['pageID'];
+          return PopularShelter(pageID: int.parse(pageID!));
         },
         transition: Transition.fadeIn),
     GetPage(

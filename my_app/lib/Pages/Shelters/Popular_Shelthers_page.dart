@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:my_app/Pages/Home/home.dart';
+import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Routes/route_helper.dart';
 import 'package:my_app/Utils/Colors.dart';
+import 'package:my_app/Utils/appConstants.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/App_column.dart';
 import 'package:my_app/Widgets/App_icon.dart';
@@ -11,10 +12,12 @@ import 'package:my_app/Widgets/Expandable_text.dart';
 import '../../Widgets/Big_texts.dart';
 
 class PopularShelter extends StatelessWidget {
-  const PopularShelter({super.key});
+  int pageID;
+  PopularShelter({Key? key, required this.pageID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var shelter = Get.find<ShelterController>().shelterList[pageID];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -29,7 +32,9 @@ class PopularShelter extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/Images/Shelther1.jpg'))),
+                      image: NetworkImage(AppConstants.BASE_URL +
+                          AppConstants.SHELTER_URL +
+                          shelter.img))),
             ),
           ),
           //Icon Widget
@@ -70,16 +75,15 @@ class PopularShelter extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppColumn(
-                    text: "Shena's Care",
+                    text: shelter.name!,
                   ),
                   SizedBox(height: Dimensions.height20),
                   BigText(text: "Introduction"),
                   SizedBox(height: Dimensions.height20),
                   Expanded(
                       child: SingleChildScrollView(
-                          child: ExpandableTextWidget(
-                              text:
-                                  "Sneha’s Care operates one of the largest dog shelters of Nepal where currently around 140 dogs are housed. The Dogs of Kathmandu are often subjected to the most horrific cruelty. They are beaten, kicked, and hit-and-run by vehicles, making them injured, in pain, or starving.\n\n Sneha’s Care receives almost 40/50 animal cruelty and abuse cases mostly related to street dogs by hotline, email, and social media. We have a well-equipped team consisting of veterinary doctors, assistants, and helpers who handle the cases by visiting the spot where the incident takes place.  Our team is always on the move in our animal ambulance where the full-fledged medical facility has been installed to transfer the animals to our clinic during serious cases. We try to handle almost all the received cases by our means and sometimes locals and other volunteers also support in rescue and medication. After analyzing the spot animal situation our team decides what should be done and where. In most cases where the injuries are minor, we medicate the animals on the spot and release them in the same spot but in serious cases, we transfer them to our clinic and also in our shelter for long-term recovery.")))
+                          child:
+                              ExpandableTextWidget(text: shelter.description!)))
                 ],
               ),
             ),
