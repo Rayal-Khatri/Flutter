@@ -12,8 +12,8 @@ import 'package:my_app/Widgets/Expandable_text.dart';
 import '../../Widgets/Big_texts.dart';
 
 class PopularShelter extends StatelessWidget {
-  int pageID;
-  PopularShelter({Key? key, required this.pageID}) : super(key: key);
+  final int pageID;
+  const PopularShelter({Key? key, required this.pageID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

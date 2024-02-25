@@ -10,7 +10,7 @@ class RouteHelper {
 
   static String getInitial() => '$initial';
   static String getShelter(int pageID) => '$Shelters?pageID=$pageID';
-  static String getDogs() => '$Dogs';
+  static String getDogs(int pageID) => '$Dogs?pageID=$pageID';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => MainPetPage()),
@@ -24,7 +24,8 @@ class RouteHelper {
     GetPage(
         name: Dogs,
         page: () {
-          return AdoptionPetDetails();
+          var pageID = Get.parameters['pageID'];
+          return AdoptionPetDetails(pageID: int.parse(pageID!));
         },
         transition: Transition.fadeIn),
   ];

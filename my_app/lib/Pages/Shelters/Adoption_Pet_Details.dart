@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Routes/route_helper.dart';
 import 'package:my_app/Utils/Colors.dart';
+import 'package:my_app/Utils/appConstants.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/App_icon.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:my_app/Widgets/Expandable_text.dart';
 
 class AdoptionPetDetails extends StatelessWidget {
-  const AdoptionPetDetails({super.key});
+  final int pageID;
+  const AdoptionPetDetails({Key? key, required this.pageID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var dog = Get.find<PopularProductController>().popularProductList[pageID];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -41,7 +45,7 @@ class AdoptionPetDetails extends StatelessWidget {
                     top: Dimensions.height10 / 2, bottom: Dimensions.height10),
                 child: Center(
                     child:
-                        BigText(size: Dimensions.TextSize26, text: "Ginger")),
+                        BigText(size: Dimensions.TextSize26, text: dog.name)),
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -56,8 +60,8 @@ class AdoptionPetDetails extends StatelessWidget {
             backgroundColor: AppColors.mainColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/Images/cat1.jpg",
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.ADOPT_PET_URL + dog.img,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -67,9 +71,7 @@ class AdoptionPetDetails extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget(
-                      text:
-                          "Meet Ginger, a charming 2-week-old ginger cat eagerly seeking a forever home. With its vibrant orange coat and adorable round eyes, Ginger is an absolute delight. This playful and curious feline is full of energy, ready to explore and bring joy to its new family. Despite its young age, Ginger is already displaying a friendly and affectionate nature, making it the perfect companion for both adults and children. If you're looking for a furry friend who will bring warmth and happiness to your home, don't miss the chance to give Ginger a loving and cark-old ginger cat eagerly seeking a forever home. With its vibrant orange coat and adorable round eyes, Ginger is an absolute delight. This playful and curious feline is full of energy, ready to explore and bring joy to its new family. Despite its young age, Ginger is already displaying a friendly and affectionate nature, making it the perfect companion for both adults and children. If you're looking for a furry friend who will bring warmth and happiness to your home, don't miss the chance to give Ginger a loving and caring forever home"),
+                  child: ExpandableTextWidget(text: dog.personality),
                   margin: EdgeInsets.only(
                       left: Dimensions.height20, right: Dimensions.height20),
                 ),

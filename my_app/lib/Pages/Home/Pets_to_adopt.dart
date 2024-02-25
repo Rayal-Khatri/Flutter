@@ -97,7 +97,9 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                     child: SmallText(text: "Recommended For You"))
               ]),
         ),
+
         //List of pets avaliable
+
         GetBuilder<PopularProductController>(builder: (Avaliable) {
           return Avaliable.isLoaded
               ? ListView.builder(
@@ -107,7 +109,7 @@ class _PetAdoptChoicesState extends State<PetAdoptChoices> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {
-                          Get.toNamed(RouteHelper.getDogs());
+                          Get.toNamed(RouteHelper.getDogs(  index));
                         },
                         child: Container(
                           margin: EdgeInsets.only(
