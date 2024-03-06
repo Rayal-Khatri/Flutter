@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:symptom_analysis/Widget/Heading_text.dart';
+import 'package:my_app/Utils/Heading_text.dart';
 
 class PredictionScreen extends StatelessWidget {
   final List<dynamic> predictions;

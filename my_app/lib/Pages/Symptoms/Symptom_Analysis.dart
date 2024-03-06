@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'Screen/predictions.dart';
-import 'Widget/loading_popup.dart';
-import 'load_dataset.dart';
-import 'package:symptom_analysis/Widget/Heading_text.dart';
-import 'package:symptom_analysis/Widget/symptom_dropdown.dart';
-import 'package:symptom_analysis/Widget/symptom_list.dart';
+import 'package:my_app/Pages/Symptoms/Predictions.dart';
+import 'package:my_app/Utils/loading_popup.dart';
+import 'package:my_app/Data/Dataset/load_dataset.dart';
+import 'package:my_app/Utils/Heading_text.dart';
+import 'package:my_app/Utils/Symptoms_dropdown.dart';
+import 'package:my_app/Utils/Symptoms_list.dart';
 
-class HomeScreen extends StatefulWidget {
+class SymptomAnalysis extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _SymptomAnalysis createState() => _SymptomAnalysis();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SymptomAnalysis extends State<SymptomAnalysis> {
   List<String> symptoms = [];
   List<String> selectedSymptoms = [];
   bool isLoading = false;

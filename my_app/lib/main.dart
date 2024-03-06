@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
 import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Pages/Home/home.dart';
+import 'package:my_app/Pages/Symptoms/Symptom_Analysis.dart';
 import 'Helper/Dependencies.dart' as dep;
 import 'Routes/route_helper.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hello Pet',
-      home: MainPetPage(),
+      home: SymptomAnalysis(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );
