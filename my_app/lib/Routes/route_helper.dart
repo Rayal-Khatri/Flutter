@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:my_app/Pages/Home/home.dart';
+import 'package:my_app/Pages/Home/home_pets.dart';
 import 'package:my_app/Pages/Shelters/Popular_Shelthers_page.dart';
 import '../Pages/Shelters/Adoption_Pet_Details.dart';
 
