@@ -5,8 +5,10 @@ class AppConstants {
   static const String BASE_URL = "http://10.0.2.2:8000";
 
   static const String ADOPT_PET_URL = "/dogs/";
-
   static const String SHELTER_URL = "/Shelters/";
+
+  static const String ITEMS_URL = "/items/";
+  static const String SHOP_URL = "/Shop/";
 
   static const String TOKEN = "9841";
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Controllers/Popular_product_controller.dart';
+import 'package:my_app/Controllers/Popular_Items_controller.dart';
 import 'package:my_app/Controllers/Shelter_controller.dart';
 import 'package:my_app/Pages/Home/home_pets.dart';
-import 'package:my_app/Pages/Symptoms/Symptom_Analysis.dart';
 import 'Helper/Dependencies.dart' as dep;
 import 'Routes/route_helper.dart';
 
@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<ShelterController>().getShelterList();
+
+    Get.find<PopularProductController>().getPopularItemList();
     Get.find<ShelterController>().getShelterList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

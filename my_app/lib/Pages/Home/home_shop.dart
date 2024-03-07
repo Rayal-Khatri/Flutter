@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Pages/Home/Pets_to_adopt.dart';
 import 'package:my_app/Utils/Colors.dart';
 import 'package:my_app/Utils/dimentions.dart';
 import 'package:my_app/Widgets/Big_texts.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
+
+import 'Items_on_shop.dart';
 
 class MainShopPage extends StatefulWidget {
   const MainShopPage({super.key});
@@ -73,7 +74,7 @@ class _MainShopPageState extends State<MainShopPage> {
           //Sliders
           Expanded(
               child: SingleChildScrollView(
-            child: PetAdoptChoices(),
+            child: ItemChoices(),
           )),
         ],
       ),

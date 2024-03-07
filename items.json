@@ -1,0 +1,78 @@
+{
+    "totalSize": 8,
+    "offset": 2,
+    "items": [
+        {
+            "name": "Catnip Mouse Toy",
+            "shop": "Pet Paradise",
+            "category": "Toy",
+            "img": "catnip_mouse_toy.jpg",
+            "price": 150,
+            "personality": "Playful and curious",
+            "description": "Filled with organic catnip for hours of entertainment"
+        },
+        {
+            "name": "Treat Dispensing Ball",
+            "shop": "Paws & Claws",
+            "category": "Toy",
+            "img": "treat_dispensing_ball.jpg",
+            "price": 200,
+            "personality": "Intelligent and active",
+            "description": "Keeps your dog mentally stimulated while providing a tasty reward"
+        },
+        {
+            "name": "Sisal Scratching Post",
+            "shop": "Scratch n' Play",
+            "category": "Furniture",
+            "img": "sisal_scratching_post.jpg",
+            "price": 350,
+            "personality": "Independent and adventurous",
+            "description": "Provides a safe and satisfying outlet for your cat's natural scratching instincts"
+        },
+        {
+            "name": "Reflective Dog Harness",
+            "shop": "Safety First Pet Store",
+            "category": "Safety Gear",
+            "img": "reflective_dog_harness.jpg",
+            "price": 400,
+            "personality": "Outdoor enthusiast",
+            "description": "Keep your dog safe during night walks with this highly visible harness"
+        },
+        {
+            "name": "Comfortable Cat Bed",
+            "shop": "Cozy Corner",
+            "category": "Bedding",
+            "img": "comfortable_cat_bed.jpg",
+            "price": 250,
+            "personality": "Cuddly and affectionate",
+            "description": "Soft and cozy bed for your feline friend to curl up in and relax"
+        },
+        {
+            "name": "Training Clicker",
+            "shop": "Training Tails",
+            "category": "Training",
+            "img": "training_clicker.jpg",
+            "price": 100,
+            "personality": "Smart and eager to learn",
+            "description": "Teach your dog new tricks with the help of this effective training tool"
+        },
+        {
+            "name": "Automatic Feeder",
+            "shop": "Feed-n-Go",
+            "category": "Feeding",
+            "img": "automatic_feeder.jpg",
+            "price": 600,
+            "personality": "Busy pet owner",
+            "description": "Ensure your pet's meals are served on time, even when you're away"
+        },
+        {
+            "name": "Interactive Cat Tunnel",
+            "shop": "Tunnel Fun",
+            "category": "Toy",
+            "img": "interactive_cat_tunnel.jpg",
+            "price": 300,
+            "personality": "Adventurous and playful",
+            "description": "Stimulate your cat's natural instincts with this engaging tunnel system"
+        }
+    ]
+}

@@ -12,14 +12,14 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:my_app/Widgets/Icon_Text.dart';
 import 'package:my_app/Widgets/Small_texts.dart';
 
-class PetAdoptChoices extends StatefulWidget {
-  const PetAdoptChoices({Key? key}) : super(key: key);
+class ItemChoices extends StatefulWidget {
+  const ItemChoices({Key? key}) : super(key: key);
 
   @override
-  State<PetAdoptChoices> createState() => _PetAdoptChoicesState();
+  State<ItemChoices> createState() => _ItemChoices();
 }
 
-class _PetAdoptChoicesState extends State<PetAdoptChoices> {
+class _ItemChoices extends State<ItemChoices> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
