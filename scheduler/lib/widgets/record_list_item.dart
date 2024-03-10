@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'record_model.dart';
-import 'constants.dart';
+import '../models/record_model.dart';
+import '../constants.dart';
 
 class RecordListItem extends StatelessWidget {
   final RecordModel record;

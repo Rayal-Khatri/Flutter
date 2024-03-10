@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recordtype.dart';
-import 'record_model.dart';
+import 'models/record_model.dart';
 
 class AddRecord extends StatefulWidget {
   @override

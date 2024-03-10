@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addrecords.dart';
-import 'record_model.dart';
-import 'record_list_item.dart';
-import 'utils/notification_service.dart';
+import 'models/record_model.dart';
+import 'widgets/record_list_item.dart';
 
 class AlarmListScreen extends StatefulWidget {
   const AlarmListScreen({Key? key}) : super(key: key);
