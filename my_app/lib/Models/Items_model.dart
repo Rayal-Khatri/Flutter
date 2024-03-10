@@ -11,9 +11,7 @@ class Products {
     if (offset != null) {
       this._offset = offset;
     }
-    if (items != null) {
-      this._items = items;
-    }
+    this._items = items;
   }
 
   int? get totalSize => _totalSize;
@@ -51,7 +49,6 @@ class Items {
   String? _category;
   String? _img;
   int? _price;
-  String? _personality;
   String? _description;
 
   Items(
@@ -60,7 +57,6 @@ class Items {
       String? category,
       String? img,
       int? price,
-      String? personality,
       String? description}) {
     if (name != null) {
       this._name = name;
@@ -77,9 +73,6 @@ class Items {
     if (price != null) {
       this._price = price;
     }
-    if (personality != null) {
-      this._personality = personality;
-    }
     if (description != null) {
       this._description = description;
     }
@@ -95,8 +88,6 @@ class Items {
   set img(String? img) => _img = img;
   int? get price => _price;
   set price(int? price) => _price = price;
-  String? get personality => _personality;
-  set personality(String? personality) => _personality = personality;
   String? get description => _description;
   set description(String? description) => _description = description;
 
@@ -106,7 +97,6 @@ class Items {
     _category = json['category'];
     _img = json['img'];
     _price = json['price'];
-    _personality = json['personality'];
     _description = json['description'];
   }
 
@@ -117,7 +107,6 @@ class Items {
     data['category'] = this._category;
     data['img'] = this._img;
     data['price'] = this._price;
-    data['personality'] = this._personality;
     data['description'] = this._description;
     return data;
   }

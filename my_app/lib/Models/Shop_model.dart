@@ -2,10 +2,9 @@ class Shops {
   int? _totalSize;
   int? _offset;
   late List<Shop>? _shop;
-  List<Shop>? get shop => _shop ;
+  List<Shop>? get shop => _shop;
 
-  Shops(
-      {required totalSize, required offset, required List<Shop>? shop}) {
+  Shops({required totalSize, required offset, required List<Shop>? shop}) {
     if (totalSize != null) {
       this._totalSize = totalSize;
     }
@@ -35,7 +34,7 @@ class Shops {
   }
 }
 
-class Shelter {
+class Shop {
   String? _name;
   String? _location;
   double? _rating;

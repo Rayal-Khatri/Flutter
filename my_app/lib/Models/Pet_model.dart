@@ -18,6 +18,7 @@ class Adoption {
   set totalSize(int? totalSize) => _totalSize = totalSize;
   int? get offset => _offset;
   set offset(int? offset) => _offset = offset;
+  
   set dogs(List<Dogs>? dogs) => _dogs = dogs;
 
   Adoption.fromJson(Map<String, dynamic> json) {

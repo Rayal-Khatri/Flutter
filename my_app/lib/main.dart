@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<ShelterController>().getShelterList();
 
-    Get.find<PopularProductController>().getPopularItemList();
-    Get.find<ShelterController>().getShelterList();
+    // Get.find<PopularProductController>().getPopularItemList();
+    // Get.find<ShelterController>().getShelterList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hello Pet',
