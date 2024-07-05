@@ -118,7 +118,7 @@ class AdoptionPetDetails extends StatelessWidget {
               ),
               child: BigText(
                 size: 18,
-                text: "Fill Adoption Form",
+                text: "Purchase",
                 color: Colors.white,
               ),
               decoration: BoxDecoration(

@@ -26,6 +26,6 @@ Future<void> init() async {
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(() => ShelterController(shelterRepo: Get.find()));
 
-  Get.lazyPut(() => PopularItemController(popularItemRepo: Get.find()));
-  Get.lazyPut(() => ShopController(shopRepo: Get.find()));
+  // Get.lazyPut(() => PopularItemController(popularItemRepo: Get.find()));
+  // Get.lazyPut(() => ShopController(shopRepo: Get.find()));
 }
